@@ -18,13 +18,7 @@ void setup() {
 }
 void loop() {
   lcd.setCursor(0, 0);
-  if (state) {
-  }
-  else {
-    digitalWrite(ledPin, LOW); 
-  } 
-  delay(1000);
-   
+  delay(1000); 
 }
 void int0() { //interrupt handler
   state = !state; //reverse state
