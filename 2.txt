@@ -12,20 +12,17 @@ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(intPin, INPUT_PULLUP);
-  //enable pull-up resistor of input pin
-  digitalWrite(ledPin, state); //set LED OFF
-  attachInterrupt(6, int0, RISING);//assign int0
+  digitalWrite(ledPin, state);
+  attachInterrupt(6, int0, RISING);
   attachInterrupt(6, int0, FALLING);
 }
 void loop() {
   lcd.setCursor(0, 0);
   if (state) {
   }
-  //turn LED on
   else {
-    digitalWrite(ledPin, LOW);
-      
-  } //turn LED off
+    digitalWrite(ledPin, LOW); 
+  } 
   delay(1000);
    
 }
