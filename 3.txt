@@ -1,22 +1,17 @@
 #include <LiquidCrystal.h>
 #include <Ultrasonic.h>
 const byte intPin = 6; //interrupt pin
-const byte ledPin = 13; //built-in LED
 #define TRIGGER_PIN 9
 #define ECHO_PIN 10
-volatile boolean state = LOW; //initial value of switch pin
 Ultrasonic ultrasonic(TRIGGER_PIN, ECHO_PIN);
 float cmMsec = 0;
 long microsec = 0 ;
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 void setup() {
   Serial.begin(9600);
-  pinMode(ledPin, OUTPUT);
   pinMode(14, INPUT);
   pinMode(intPin, INPUT_PULLUP);
-  //enable pull-up resistor of input pin
-  digitalWrite(ledPin, state); //set LED OFF
-  attachInterrupt(6, int0, RISING);//assign int0
+  attachInterrupt(6, int0, RISING);
   attachInterrupt(6, int0, FALLING);
 }
 void loop() {
@@ -26,22 +21,18 @@ void loop() {
   if (yes!=4095) {
    interrupts();
   }
-  //turn LED on
   else {
-   
    noInterrupts();  
-  } //turn LED off
+  }
   delay(1000);
-   
 }
-void int0() { //interrupt handler
-  state = !state; //reverse state
-  float cmMsec, inMsec;
+void int0() { 
+  float cmMsec;
   long microsec = ultrasonic.timing();
   cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
   lcd.clear();
   lcd.print("MS: ");
-    lcd.print(microsec);
-    lcd.print("CM: ");
-    lcd.print(cmMsec);
+  lcd.print(microsec);
+  lcd.print("CM: ");
+  lcd.print(cmMsec);
 }
