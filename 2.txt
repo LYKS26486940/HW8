@@ -22,10 +22,10 @@ void loop() {
 }
 void int0() { //interrupt handler
   state = !state; //reverse state
-  float cmMsec, inMsec;
+  float cmMsec;
   long microsec = ultrasonic.timing();
   cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
   lcd.clear();
-    lcd.print("CM: ");
-    lcd.print(cmMsec);
+  lcd.print("CM: ");
+  lcd.print(cmMsec);
 }
